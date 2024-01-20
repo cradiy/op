@@ -1,0 +1,11 @@
+[dependencies]
+
+[package]
+description = "a simple library for operator"
+edition = "2021"
+keywords = ["ternary", "op", "operator", "marco"]
+license = "Unlicense"
+repository = "https://github.com/Pesju13/op.git"
+name = "op"
+readme = "README.md"
+version = "0.1.2"
