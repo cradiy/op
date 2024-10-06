@@ -1,3 +1,4 @@
+#![no_std]
 #[macro_export]
 /// ## Ternary Operator
 ///
@@ -100,23 +101,53 @@ macro_rules! result {
 /// # Examples
 ///  ```
 /// use op::catch;
-///
-/// let result1: Result<i32, i32> = Ok(1);
-/// let result2: Result<i32, i32> = Ok(2);
-/// assert_eq!(Ok(3), catch!(i32 -> Ok(result1? + result2?)));
+/// type Error = &'static str;
+/// let result1: Result<i32, &'static str> = Ok(1);
+/// let result2: Result<i32, &'static str> = Ok(2);
+/// let result3: Result<i32, &'static str> = Err("Error");
+/// assert_eq!(Ok(3), catch!(Error -> Ok(result1? + result2?)));
+/// assert_eq!(Err("Error"), catch!(Error -> Ok(result2? + result3?)));
 ///
 /// let option1: Option<i32> = Some(1);
 /// let option2: Option<i32> = Some(2);
+/// let option3: Option<i32> = None;
 /// assert_eq!(Some(3), catch!(Some(option1? + option2?)));
+/// assert_eq!(None, catch!(Some(option2? + option3?)));
 /// ```
 #[macro_export]
 macro_rules! catch {
-    ($e:ident -> $stmt:stmt) => {{
-        let catch = || -> std::result::Result<_, $e> { $stmt };
-        catch()
-    }};
-    ($stmt:stmt) => {{
-        let catch = || -> std::option::Option<_> { $stmt };
-        catch()
-    }};
+    ($err:ident -> $stmt:stmt) => {
+        (|| -> ::core::result::Result<_, $err> { $stmt })()
+    };
+    ($stmt:stmt) => {
+        (|| -> ::core::option::Option<_> { $stmt })()
+    };
+}
+
+
+
+pub trait Operator: Sized {
+    /// A method that behaves similarly to a ternary operator
+    /// 
+    /// Equivalent to `if $flag { $true } else { $false }`
+    /// # Usage
+    /// 
+    /// ```
+    /// use op::Operator;
+    /// 
+    /// assert_eq!(2, 2.if_else(true, 5));
+    /// assert_eq!(5, 2.if_else(false, 5));
+    /// 
+    /// ```
+    fn if_else(self, flag: bool, r#false: Self) -> Self;
+}
+
+impl<T> Operator for T {
+    fn if_else(self, flag: bool, r#false: Self) -> Self {
+        if flag {
+            self
+        } else {
+            r#false
+        }
+    }
 }
