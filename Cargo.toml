@@ -3,9 +3,9 @@
 [package]
 description = "a simple library for operator"
 edition = "2021"
-keywords = ["ternary", "op", "operator", "marco", "catch", "some"]
+keywords = ["ternary", "no_std", "operator", "catch"]
 license = "Unlicense"
-repository = "https://github.com/Pesju13/op.git"
+repository = "https://github.com/cradiy/op.git"
 name = "op"
 readme = "README.md"
-version = "0.1.3"
+version = "0.1.4"
