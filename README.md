@@ -3,16 +3,11 @@
 ## Example - Ternary
 
 ```rust
- use op::ternary;
- let n = ternary!(true => 0; 1);
+ use op::if_else;
+ let n = if_else!(true => 0; 1);
  assert_eq!(n, 0);
- let n = ternary!(false => 0; 1);
+ let n = if_else!(false => 0; 1);
  assert_eq!(n, 1);
- // or
- use op::Operator;
-
- assert_eq!(2, 2.if_else(true, 5));
- assert_eq!(5, 2.if_else(false, 5));
 
  ```
 

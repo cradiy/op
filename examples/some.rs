@@ -1,13 +1,7 @@
 use op::some;
 
-
 fn main() {
-    println!("{}", test(Some(45)));
-    println!("{}", test(None));
-
-}
-
-fn test(i: Option<i32>) -> i32 {
-    let i = some!(i; return 34);
-    i + 1
+    let s1 = Some(1);
+    let s2 = Some("Hello");
+    assert_eq!(Some((1, "Hello")), some!(s1, s2))
 }
