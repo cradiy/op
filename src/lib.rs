@@ -1,9 +1,8 @@
 #[cfg(feature = "full")]
 pub use op_proc::*;
-
 mod catch;
+mod input;
 mod some;
-pub use if_else as ternary;
 
 #[macro_export]
 /// ## Ternary Operator

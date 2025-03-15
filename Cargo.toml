@@ -2,15 +2,15 @@
 [package]
 description = "a simple library for operator"
 edition = "2024"
-keywords = ["ternary", "operator", "catch"]
+keywords = ["ternary", "operator", "catch", "input"]
 license = "Unlicense"
 repository = "https://github.com/cradiy/op.git"
 name = "op"
 readme = "README.md"
-version = "0.2.0"
+version = "0.3.0"
 
 [dependencies]
-op-proc = { version = "0.1.0", optional = true}
+op-proc = { version = "0.1.0", optional = true }
 
 [features]
 full = ["dep:op-proc"]
